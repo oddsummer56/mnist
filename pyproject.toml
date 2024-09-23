@@ -1,14 +1,20 @@
 [project]
 name = "mnist"
-version = "0.1.0"
-description = "Default template for PDM package"
+version = "0.2.0"
+description = "MNIST"
 authors = [
     {name = "oddsummer56", email = "oddsummer56@gmail.com"},
 ]
-dependencies = []
-requires-python = "==3.11.*"
+dependencies = [
+    "fastapi>=0.114.1",
+    "uvicorn[standard]>=0.30.6",
+    "python-multipart>=0.0.9",
+    "pymysql>=1.1.1",
+    "jigeum>=1.0.0",
+]
+requires-python = ">=3.11"
 readme = "README.md"
-license = {text = "MIT"}
+license = {text = "GNU"}
 
 
 [tool.pdm]
