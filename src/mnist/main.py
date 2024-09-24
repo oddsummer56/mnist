@@ -3,16 +3,16 @@ from fastapi import FastAPI, File, UploadFile
 import os
 import pymysql.cursors
 import json
+from mnist.db import get_conn
 
 app = FastAPI()
 
 
 @app.get("/files")
 async def file_list():
-    conn = pymysql.connect(host='172.17.0.1', port = 53306,
-                            user = 'mnist', password = '1234',
-                            database = 'mnistdb',
-                            cursorclass=pymysql.cursors.DictCursor)
+    
+    conn=get_conn()
+    
     with conn:
         with conn.cursor() as cursor:
             sql = "SELECT * FROM image_processing WHERE prediction_time IS NULL ORDER BY num"
@@ -30,7 +30,7 @@ async def create_upload_file(file: UploadFile):
     file_ext = file.content_type.split('/')[-1]
 
     # 디렉토리가 없으면 오류, 코드에서 확인 및 만들기 추가
-    upload_dir = "/home/oddsummer/code/mnist/img"
+    upload_dir = os.getenv('UPLOAD_DIR','/home/oddsummer/code/mnist/img')
     if not os.path.exists(upload_dir):
         os.makedirs(upload_dir)
     import uuid
