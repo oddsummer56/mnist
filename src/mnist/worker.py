@@ -70,3 +70,4 @@ def send_line_noti(file_name, presult):
     response = requests.post(url, data=data, headers=headers)
     print(response.text)
     print("SEND LINE NOTI")
+
