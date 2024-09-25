@@ -31,11 +31,11 @@ async def create_upload_file(file: UploadFile):
 
     # 디렉토리가 없으면 오류, 코드에서 확인 및 만들기 추가
     upload_dir = os.getenv('UPLOAD_DIR','/home/oddsummer/code/mnist/img')
+    
     if not os.path.exists(upload_dir):
         os.makedirs(upload_dir)
     import uuid
-    file_full_path = os.path.join(upload_dir, 
-            f'{uuid.uuid4()}.{file_ext}')
+    file_full_path = os.path.join(upload_dir, f'{uuid.uuid4()}.{file_ext}')
 
     with open(file_full_path, "wb") as f:
         f.write(img)
